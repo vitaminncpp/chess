@@ -1,42 +1,27 @@
 package com.vitaminncpp.chess.services;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.vitaminncpp.chess.entities.User;
+import com.vitaminncpp.chess.repositories.IUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
+@Service
 public class UserService implements UserDetailsService {
+    private final IUserRepository repository;
 
-    public UserService() {
-        System.out.println("UserService");
+    public UserService(IUserRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        System.out.println("UserService|loadUserByUsername");
-        return new UserDetails() {
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-            }
-
-            @Override
-            public String getPassword() {
-                System.out.println("UserService|getPassword");
-                return username;
-            }
-
-            @Override
-            public String getUsername() {
-                System.out.println("UserService|getUsername");
-                System.out.println(username);
-                return username;
-            }
-        };
+        System.out.println();
+        Optional<User> user = this.repository.findByUsername(username);
+        System.out.println(user);
+        return user.get();
     }
 }

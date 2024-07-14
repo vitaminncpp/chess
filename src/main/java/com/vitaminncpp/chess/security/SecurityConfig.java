@@ -1,6 +1,5 @@
 package com.vitaminncpp.chess.security;
 
-import com.vitaminncpp.chess.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,8 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    UserDetailsService userService;
+
     public SecurityConfig() {
-        System.out.println("SecurityConfig");
     }
 
     @Bean
@@ -44,10 +44,15 @@ public class SecurityConfig {
         };
     }
 
+    public void setUserService(UserDetailsService userService) {
+        System.out.println("***************************************************************");
+        this.userService = userService;
+    }
+
     @Bean
     public UserDetailsService userDetailsService() {
         System.out.println("SecurityConfig|userDetailsService");
-        return new UserService();
+        return this.userService;
     }
 
 }
