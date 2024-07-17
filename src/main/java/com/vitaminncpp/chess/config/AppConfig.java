@@ -15,10 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
+    private final UserService userService;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserService();
+        return this.userService;
     }
 
     @Bean

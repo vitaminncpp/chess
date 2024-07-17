@@ -34,7 +34,7 @@ public class JwtService {
     }
 
     private SecretKey getSecretKey() {
-        return Keys.hmacShaKeyFor("secret".getBytes());
+        return Keys.hmacShaKeyFor("NB2CjHOWzFRxYO5UZocldbEH2pVXPkBs".getBytes());
     }
 
     public boolean isTokenValid(String token, UserDetails user) {

@@ -17,7 +17,7 @@ import java.util.Optional;
 @Getter
 @Setter
 public class UserService implements UserDetailsService {
-    private final IUserRepository repository = null;
+    private final IUserRepository repository;
 
 
     @Override
@@ -30,5 +30,9 @@ public class UserService implements UserDetailsService {
         } else {
             throw new UsernameNotFoundException(username);
         }
+    }
+
+    public User save(User user) {
+        return this.repository.save(user);
     }
 }

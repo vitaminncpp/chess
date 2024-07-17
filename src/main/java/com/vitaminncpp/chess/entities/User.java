@@ -18,6 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email"), @UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "id")})
 public class User implements UserDetails {
     @Id
