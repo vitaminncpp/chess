@@ -1,1 +1,1 @@
-### Backend for (github.com/vitaminncpp/chess-ui)[https://github.com/vitaminncpp/chess-ui]
+### Backend for [github.com/vitaminncpp/chess-ui](https://github.com/vitaminncpp/chess-ui)
