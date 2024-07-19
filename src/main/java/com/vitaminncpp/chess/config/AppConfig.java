@@ -1,6 +1,6 @@
 package com.vitaminncpp.chess.config;
 
-import com.vitaminncpp.chess.services.UserService;
+import com.vitaminncpp.chess.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

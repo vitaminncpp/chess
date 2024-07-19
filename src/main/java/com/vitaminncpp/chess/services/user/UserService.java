@@ -1,4 +1,4 @@
-package com.vitaminncpp.chess.services;
+package com.vitaminncpp.chess.services.user;
 
 import com.vitaminncpp.chess.entities.User;
 import com.vitaminncpp.chess.repositories.IUserRepository;

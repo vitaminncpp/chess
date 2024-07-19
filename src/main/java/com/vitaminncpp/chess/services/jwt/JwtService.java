@@ -1,8 +1,10 @@
-package com.vitaminncpp.chess.services;
+package com.vitaminncpp.chess.services.jwt;
 
+import com.vitaminncpp.chess.config.AppProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,9 @@ import java.util.function.Function;
 
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
+    private final AppProperties appProperties;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -34,7 +38,7 @@ public class JwtService {
     }
 
     private SecretKey getSecretKey() {
-        return Keys.hmacShaKeyFor("NB2CjHOWzFRxYO5UZocldbEH2pVXPkBs".getBytes());
+        return Keys.hmacShaKeyFor(appProperties.getJwtSecret().getBytes());
     }
 
     public boolean isTokenValid(String token, UserDetails user) {
