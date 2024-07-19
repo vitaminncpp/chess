@@ -1,7 +1,7 @@
 package com.vitaminncpp.chess.services.auth;
 
 import com.vitaminncpp.chess.entities.User;
-import com.vitaminncpp.chess.services.UserService;
+import com.vitaminncpp.chess.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

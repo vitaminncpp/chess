@@ -1,4 +1,4 @@
-package com.vitaminncpp.chess.services;
+package com.vitaminncpp.chess.services.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

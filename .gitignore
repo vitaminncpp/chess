@@ -87,3 +87,7 @@ nb-configuration.xml
 ##############################
 *.log
 application.properties
+##############################
+## http requests
+##############################
+http

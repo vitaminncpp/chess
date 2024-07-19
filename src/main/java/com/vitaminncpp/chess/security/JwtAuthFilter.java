@@ -1,6 +1,6 @@
 package com.vitaminncpp.chess.security;
 
-import com.vitaminncpp.chess.services.JwtService;
+import com.vitaminncpp.chess.services.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
