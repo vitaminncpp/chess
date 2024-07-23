@@ -1,6 +1,7 @@
 package com.vitaminncpp.chess.security;
 
 import com.vitaminncpp.chess.config.APIConfig;
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(matchers -> matchers
+                        .dispatcherTypeMatchers(DispatcherType.ERROR).authenticated()
                         .requestMatchers(HttpMethod.GET, APIConfig.V_1 + APIConfig.AUTHENTICATION_URL + "/**").permitAll()
                         .requestMatchers(HttpMethod.POST, APIConfig.V_1 + APIConfig.AUTHENTICATION_URL + "/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, APIConfig.V_1 + APIConfig.AUTHENTICATION_URL + "/**").permitAll()
