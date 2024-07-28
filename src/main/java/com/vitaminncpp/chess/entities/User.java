@@ -1,14 +1,11 @@
 package com.vitaminncpp.chess.entities;
 
-import com.vitaminncpp.chess.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -44,12 +41,9 @@ public class User implements UserDetails {
     @Column(name = "is_disabled", nullable = false, table = "users")
     private boolean isDisabled = false;
 
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return null;
     }
 
     @Override

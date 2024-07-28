@@ -29,7 +29,11 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails user, Map<String, Object> extraClaims) {
+    public String generateAccessToken(UserDetails user, Map<String, Object> extraClaims) {
+        return Jwts.builder().claims().add(extraClaims).and().issuer("com.vitaminncpp.chess").subject(user.getUsername()).audience().add(user.getUsername()).and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)).issuedAt(new Date(System.currentTimeMillis())).id(UUID.randomUUID().toString()).signWith(getSecretKey()).compact();
+    }
+
+    public String generateRefreshToken(UserDetails user, Map<String, Object> extraClaims) {
         return Jwts.builder().claims().add(extraClaims).and().issuer("com.vitaminncpp.chess").subject(user.getUsername()).audience().add(user.getUsername()).and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)).issuedAt(new Date(System.currentTimeMillis())).id(UUID.randomUUID().toString()).signWith(getSecretKey()).compact();
     }
 

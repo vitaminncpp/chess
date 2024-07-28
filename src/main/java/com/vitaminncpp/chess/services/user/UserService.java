@@ -5,6 +5,8 @@ import com.vitaminncpp.chess.repositories.IUserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,14 +19,13 @@ import java.util.Optional;
 @Getter
 @Setter
 public class UserService implements UserDetailsService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final IUserRepository repository;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println();
         Optional<User> user = this.repository.findByUsername(username);
-        System.out.println(user);
         if (user.isPresent()) {
             return user.get();
         } else {
@@ -33,6 +34,12 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(User user) {
-        return this.repository.save(user);
+        User savedUser = null;
+        try {
+            savedUser = this.repository.save(user);
+        } catch (Exception e) {
+            return null;
+        }
+        return savedUser;
     }
 }
