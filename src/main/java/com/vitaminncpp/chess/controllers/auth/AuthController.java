@@ -28,7 +28,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(APIConfig.REGISTER_URL + "1")
+    @GetMapping(APIConfig.ACCESS_TOKEN)
     @ResponseBody
     public ResponseEntity<RegisterResponse> registerGet() {
         RegisterResponse response = new RegisterResponse();
