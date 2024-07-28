@@ -34,6 +34,12 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(User user) {
-        return this.repository.save(user);
+        User savedUser = null;
+        try {
+            savedUser = this.repository.save(user);
+        } catch (Exception e) {
+            return null;
+        }
+        return savedUser;
     }
 }
