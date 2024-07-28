@@ -1,8 +1,10 @@
-package com.vitaminncpp.chess.services;
+package com.vitaminncpp.chess.services.jwt;
 
+import com.vitaminncpp.chess.config.AppProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,9 @@ import java.util.function.Function;
 
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
+    private final AppProperties appProperties;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -25,7 +29,11 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails user, Map<String, Object> extraClaims) {
+    public String generateAccessToken(UserDetails user, Map<String, Object> extraClaims) {
+        return Jwts.builder().claims().add(extraClaims).and().issuer("com.vitaminncpp.chess").subject(user.getUsername()).audience().add(user.getUsername()).and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)).issuedAt(new Date(System.currentTimeMillis())).id(UUID.randomUUID().toString()).signWith(getSecretKey()).compact();
+    }
+
+    public String generateRefreshToken(UserDetails user, Map<String, Object> extraClaims) {
         return Jwts.builder().claims().add(extraClaims).and().issuer("com.vitaminncpp.chess").subject(user.getUsername()).audience().add(user.getUsername()).and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)).issuedAt(new Date(System.currentTimeMillis())).id(UUID.randomUUID().toString()).signWith(getSecretKey()).compact();
     }
 
@@ -34,7 +42,7 @@ public class JwtService {
     }
 
     private SecretKey getSecretKey() {
-        return Keys.hmacShaKeyFor("NB2CjHOWzFRxYO5UZocldbEH2pVXPkBs".getBytes());
+        return Keys.hmacShaKeyFor(appProperties.getJwtSecret().getBytes());
     }
 
     public boolean isTokenValid(String token, UserDetails user) {
