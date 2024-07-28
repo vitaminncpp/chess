@@ -28,7 +28,6 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(matchers -> matchers
-                        .dispatcherTypeMatchers(DispatcherType.ERROR).authenticated()
                         .requestMatchers(HttpMethod.GET, APIConfig.V_1 + APIConfig.AUTHENTICATION_URL + "/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.POST, APIConfig.V_1 + APIConfig.AUTHENTICATION_URL + "/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.PUT, APIConfig.V_1 + APIConfig.AUTHENTICATION_URL + "/**", "/error").permitAll()
