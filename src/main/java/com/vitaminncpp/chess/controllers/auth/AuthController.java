@@ -74,7 +74,7 @@ public class AuthController {
         } catch (UsernameNotFoundException ex) {
             return ResponseEntity.ok(Response
                     .builder().statusCode(404)
-                    .success(true).message(Messages.USER_NOT_EXISTS)
+                    .success(false).message(Messages.USER_NOT_EXISTS)
                     .data(null)
                     .build());
         }
