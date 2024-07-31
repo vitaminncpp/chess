@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController("PublicGameController")
 @RequestMapping(APIConfig.V_1 + APIConfig.PUBLIC_URL + APIConfig.GAME_URL)
-public class GamePublicController {
+public class GameController {
 
     @GetMapping(APIConfig.START)
     ResponseEntity<String> startGame(RequestEntity<Void> request) {
